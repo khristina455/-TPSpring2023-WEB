@@ -1,0 +1,175 @@
+
+.p-3 {
+  padding: 1rem !important;
+}
+
+.text-bg-dark {
+  color: #fff !important;
+  background-color: #000000 !important;
+}
+
+.logo {
+  margin-right: 2rem;
+  font-size: 25px;
+}
+
+.logo > img {
+  width: 35px;
+  height: 35px;
+}
+
+.ml-9 {
+  margin-left: 9rem;
+}
+
+.container {
+  max-width: 1200px;
+}
+
+.me-lg-auto {
+  margin-right: auto !important;
+}
+.me-lg-3 {
+  margin-right: 1rem !important;
+}
+
+.me-2 {
+  margin-right: 0.5rem !important;
+}
+
+.q {
+  list-style-type: none; /* Убираем маркеры */
+  border: solid black;
+  height: 12rem;
+  width: 100%;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+}
+.list-of-q {
+  padding-left: 0; 
+  margin-right: 2rem;
+}
+
+.btn-add {
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  margin-top: 0.1rem;
+}
+
+.profile > img {
+  display: block;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0.6rem;
+  margin-bottom: 0.2rem;
+  border: 1px solid rgb(35, 34, 34); /* Параметры рамки */
+  box-shadow: 0 0 7px #666;
+}
+
+.member > a {
+  text-decoration: underline;
+}
+
+.profile > a {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+}
+
+.text-q {
+}
+
+.header-q {
+  text-decoration: underline;
+}
+
+.tags {
+  padding: 0;
+}
+
+.tag {
+  display: inline; /* Отображать как строчный элемент */
+    margin-right: 1rem; /* Отступ слева */
+   /* border: 1px solid #000; Рамка вокруг текста */
+    padding: 1rem; 
+  /*list-style-type: none;
+  height: 2rem;
+  display: inline;
+  font-size: 20px;
+  padding: 0rem 0.2rem 0.2rem 0rem;
+  */
+}
+
+.btn-up {
+  background-image: url(../img/up-arrow.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 1rem;
+  height: 1rem;
+}
+
+.members {
+  padding-left: 0.5rem;
+}
+
+.member > a {
+  font-size: 20px;
+}
+
+.btn-down {
+  background-image: url(../img/down-arrow.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 1rem;
+  height: 1rem;
+}
+
+.arrows {
+  width: 1rem;
+  height: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.counter {
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+footer {
+  max-height: 5rem;
+}
+
+
+.answer-tags{
+  display: inline;
+  margin-left: 2rem;
+}
+
+.list-answer-tags {
+  display: inline;
+  padding: 0;
+}
+
+.answer-tag {
+  display: inline; /* Отображать как строчный элемент */
+    margin-right: 0.1rem; /* Отступ слева */
+   /* border: 1px solid #000; Рамка вокруг текста */
+    padding: 0.1rem; 
+}
+
+
+.checkbox {
+  text-align: center;
+  padding-top: 1rem;
+}

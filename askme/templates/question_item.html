@@ -1,0 +1,35 @@
+{% load static %}
+
+<div class="row">
+<div class="col-3 profile">
+  <img src= "{% static "img/index.jpeg" %}" />
+  <a href="#">Pepe Popov</a>
+  <div>
+    <div class="counter">
+      <span style = "margin-right: 0.3rem;"> 0 </span>
+      <span class="arrows">
+        <button class="btn-up"></button>
+        <button class="btn-down"></button>
+      </span>
+    </div>
+  </div>
+</div>
+<div class="col-9 pt-2">
+  <a href="{% url "question" question.id %}" class="header-q">
+    <h3>{{question.title}}</h3>
+  </a>
+  <p class="text-q">
+    {{question.text}}
+  </p>
+  <row class = "footr-q">
+    <span class = "count-answer">answer(3)</span>
+    <span class = "answer-tags">
+        Tags:
+        <ul class = "list-answer-tags">
+         <li class = "answer-tag"><a href="#">Go</a></li>,
+         <li class = "answer-tag"><a href="#">SQL</a></li>
+        </ul>
+    </span>
+  </row>
+</div>
+</div>

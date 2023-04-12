@@ -1,0 +1,26 @@
+{% extends "base.html"%}
+
+{% block content%}
+          <div class="row my-4">
+            <div class="col-5" style="padding-right: 0">
+                <h2>New Question</h2>
+              </div>
+          </div>
+          <div>
+            <form>
+                <div class="form-group">
+                  <label for="title-answer">Title</label>
+                  <input type="title" class="form-control" id="titleAnswer" placeholder="Enter title">
+                </div>
+                <div class="form-group">
+                  <label for="text">Text</label>
+                  <textarea class="form-control" id="text" rows="5" placeholder="Enter your answer"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="tags-answer">Tags</label>
+                    <input type="tags" class="form-control" id="tagsAnswer" placeholder="Enter tags">
+                </div>
+                <button type="ask" class="btn btn-outline-dark me-2 mb-3">Ask</button>
+              </form>
+          </div> 
+{% endblock content%}

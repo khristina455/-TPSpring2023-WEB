@@ -1,0 +1,86 @@
+{% extends "base.html"%}
+{% load static %}
+
+{% block content%}
+          <div class="row my-4">
+            <div class="row" style = "margin-right: 2rem; border-bottom: 1px solid black; padding-bottom: 1rem;">
+                <div class="col-3 profile">
+                  <img src= "{% static "img/index.jpeg" %}" />
+                  <a href="#">Pepe Popov</a>
+                  <div>
+                    <div class="counter">
+                      <span style = "margin-right: 0.3rem;"> 0 </span>
+                      <span class="arrows">
+                        <button class="btn-up"></button>
+                        <button class="btn-down"></button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-9 pt-2">
+                  <a href="#" class="header-q">
+                    <h3>{{question.title}}</h3>
+                  </a>
+                  <p class="text-q">
+                    {{question.text}}
+                  </p>
+                  <row class = "footr-q">
+                    <span class = "answer-tags">
+                        Tags:
+                        <ul class = "list-answer-tags">
+                         <li class = "answer-tag"><a href="#">Go</a></li>,
+                         <li class = "answer-tag"><a href="#">SQL</a></li>
+                        </ul>
+                    </span>
+                  </row>
+                </div>
+            </div>
+          </div>
+          <ul style="padding: 0rem;">
+            <li class="q">
+                <div class="row">
+                  <div class="col-3 profile">
+                    <img src= "{% static "img/index.jpeg" %}" />
+                    <a href="#">Pepe Popov</a>
+                    <div class = "checkbox">
+                        Correct
+                        <input type="checkbox">
+                    </div>
+                  </div>
+                  <div class="col-9 pt-2">
+                    <p class="text-q">
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                      Modi maiores tempore doloremque provident animi numquam,
+                      commodi rerum voluptatibus soluta neque?
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li class="q">
+                <div class="row">
+                  <div class="col-3 profile">
+                    <img src= "{% static "img/index.jpeg" %}" />
+                    <a href="#">Pepe Popov</a>
+                    <div class = "checkbox">
+                        Correct
+                        <input type="checkbox">
+                    </div>
+                  </div>
+                  <div class="col-9 pt-2">
+                    <p class="text-q">
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                      Modi maiores tempore doloremque provident animi numquam,
+                      commodi rerum voluptatibus soluta neque?
+                    </p>
+                  </div>
+                </div>
+              </li>
+              
+          </ul> 
+          <div class="form-group" style = "padding-top: 2rem; border-top: 1px solid black; padding-bottom: 1rem;">
+            <textarea class="form-control" id="answer-to-enter" rows="5" placeholder="Enter your answer" style = "border: 1px solid black;"></textarea>
+            <button type="button" class="btn btn-outline-dark me-2">
+                Answer
+            </button>
+          </div>
+{% endblock content%}

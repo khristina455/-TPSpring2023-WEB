@@ -26,8 +26,11 @@
     <span class = "answer-tags">
         Tags:
         <ul class = "list-answer-tags">
-         <li class = "answer-tag"><a href="#">Go</a></li>,
-         <li class = "answer-tag"><a href="#">SQL</a></li>
+          {% for t in question.tags %}
+                <li class = "answer-tag"><a href="#">
+                  {{t}}
+                </a></li>
+          {% endfor %}
         </ul>
     </span>
   </row>

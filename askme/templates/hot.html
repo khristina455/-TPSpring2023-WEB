@@ -1,0 +1,16 @@
+{% extends "base.html"%}
+
+{% block content%}
+          <div class="row my-4">
+            <div class="col-5" style="padding-right: 0">
+              <h2>Hot Questions</h2>
+            </div>
+          </div>
+          <ul class="list-of-q">
+              {% for question in questions %}
+                <li class="q">
+                    {%include "question_item.html"%}
+                </li>
+              {% endfor %}
+          </ul>
+{% endblock content%}

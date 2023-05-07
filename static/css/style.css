@@ -173,3 +173,31 @@ footer {
   text-align: center;
   padding-top: 1rem;
 }
+
+.error {
+  font-size: 0.7rem;
+  color: red;
+  padding-bottom: 0.5rem;
+}
+
+#block-user-img {
+  display: block;
+  width: 100%;
+  height: 80%;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0.6rem;
+  margin-bottom: 0.2rem;
+  border: 1px solid rgb(35, 34, 34); /* Параметры рамки */
+  box-shadow: 0 0 7px #666;
+}
+
+#block-user-name{
+  margin-left: 0.1rem;
+  margin-top: 2rem;
+}
+
+#block-user-settings{
+  margin-top: 1rem;
+}

@@ -15,7 +15,7 @@
   </div>
 </div>
 <div class="col-9 pt-2">
-  <a href="{% url "question" question.id %}" class="header-q">
+  <a href="{% url 'question' question.id %}" class="header-q">
     <h3>{{question.title}}</h3>
   </a>
   <p class="text-q">
@@ -26,9 +26,9 @@
     <span class = "answer-tags">
         Tags:
         <ul class = "list-answer-tags">
-          {% for t in question.tags %}
-                <li class = "answer-tag"><a href="#">
-                  {{t}}
+          {% for tag in question.tags %}
+                <li class = "answer-tag"><a href="{% url 'tag' tag %}">
+                  {{tag}}
                 </a></li>
           {% endfor %}
         </ul>

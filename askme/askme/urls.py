@@ -19,12 +19,12 @@ from django.urls import path
 from askmeWEB import views
 
 urlpatterns = [
-    path('', views.index),
+    path('', views.index, name="index"),
     path('admin/', admin.site.urls),
     path('question/<int:question_id>/', views.question, name="question"),
-    path('ask/', views.ask),
-    path('login/', views.login),
-    path('singup/', views.singup),
-    path('hot/', views.hot),
-    path('tag/<str:tag_name>/', views.tag, name="tag"),
+    path('ask/', views.ask, name="ask"),
+    path('login/', views.login, name="login"),
+    path('singup/', views.singup, name="singup"),
+    path('hot/', views.hot, name="hot"),
+    path('tag/<str:tag>/', views.tag, name="tag"),
 ]

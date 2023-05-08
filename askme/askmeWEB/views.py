@@ -4,9 +4,17 @@ from django.core.paginator import Paginator
 from . import models
 
 
+def paginate(objects_list, request, per_page=3):
+    paginator = Paginator(objects_list, per_page)
+    page_number = request.GET.get('page')
+    return paginator.get_page(page_number)
+
+
 def index(request):
-    context = {"questions": models.QUESTIONS, "title": "New Questions"}
-    return paginate(context, request)
+    questions = models.QUESTIONS
+    page_obj = paginate(questions, request, 3)
+    context = {'page_obj': page_obj, 'title': 'New Questions'}
+    return render(request, 'index.html', context)
 
 
 def hot(request):
@@ -34,20 +42,15 @@ def singup(request):
     return render(request, "singup.html")
 
 
-def tag(request, tag_name):
+def tag(request, tag):
     TAGQUESTIONS = []
-    for q in models.QUESTIONS :
+    for q in models.QUESTIONS:
         for t in q.get('tags'):
-            if tag_name == t:
+            if tag == t:
                 TAGQUESTIONS.append(q)
 
-    context = {"questions": TAGQUESTIONS, "title": f"Tag: {tag_name}"}
+    context = {"questions": TAGQUESTIONS, "title": f"Tag: {tag}"}
     return paginate(context, request)
 
 
-def paginate(context, request, per_page=3):
-    paginator = Paginator(context.get("questions"), per_page)
-    page_number = request.GET.get("page")
-    context["questions"] = paginator.get_page(page_number)
-    page = render(request, "index.html", context)
-    return page
+

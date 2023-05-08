@@ -6,16 +6,20 @@
               <h2>{{title}}</h2>
             </div>
             <div class="col-1" style="padding-left: 0">
-              <button type="button" class="btn btn-add btn-outline-success" ;>
-                +
-              </button>
+                <a href="{% url 'ask' %}">
+                  <button type="button" class="btn btn-add btn-outline-success" >
+                    +
+                  </button>
+                </a>
             </div>
           </div>
           <ul class="list-of-q">
-              {% for question in questions %}
+              {% for question in page_obj %}
                 <li class="q">
                     {%include "question_item.html"%}
                 </li>
               {% endfor %}
           </ul>
+         {% include "paginator.html" %}
+
 {% endblock content%}

@@ -31,8 +31,8 @@
           <ul
             class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 mr-5"
           >
-            <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">Questions</a></li>
+            <li><a href= "{% url 'index' %}" class="nav-link px-2 text-white">Home</a></li>
+            <li><a href="{% url 'hot' %}" class="nav-link px-2 text-white">Hot Questions</a></li>
             <li><a href="#" class="nav-link px-2 text-white">Tags</a></li>
             <li><a href="#" class="nav-link px-2 text-white">Users</a></li>
           </ul>
@@ -46,10 +46,14 @@
             />
           </form>
           <div class="text-end">
-            <button type="button" class="btn btn-outline-light me-2">
-              Login
-            </button>
-            <button type="button" class="btn btn-warning">Sign-up</button>
+            <a href = "{% url 'login' %}">
+              <button type="button" class="btn btn-outline-light me-2">
+                Login
+              </button>
+            </a>
+            <a href = "{% url 'singup' %}">
+              <button type="button" class="btn btn-warning">Sign-up</button>
+            </a>
           </div>
         </div>
       </div>
@@ -66,12 +70,12 @@
           </div>
           <div class = "row">
             <ol class="tags">
-              <li class="tag"><a>Python</a></li>
-              <li class="tag"><a>SQL</a></li>
-              <li class="tag"><a>Rust</a></li>
-              <li class="tag"><a>Django</a></li>
-              <li class="tag"><a>Go</a></li>
-              <li class="tag"><a>C++</a></li>
+              <li class="tag"><a href="{% url 'tag' 'Python' %}">Python</a></li>
+              <li class="tag"><a href="{% url 'tag' 'SQL' %}">SQL</a></li>
+              <li class="tag"><a href="{% url 'tag' 'Dust' %}">Rust</a></li>
+              <li class="tag"><a href="{% url 'tag' 'Django' %}">Django</a></li>
+              <li class="tag"><a href="{% url 'tag' 'Go' %}">Go</a></li>
+              <li class="tag"><a href="{% url 'tag' 'C++' %}">C++</a></li>
             </ol>
           </div>
           <div class="row mt-4">

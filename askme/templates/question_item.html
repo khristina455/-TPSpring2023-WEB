@@ -3,10 +3,10 @@
 <div class="row">
 <div class="col-3 profile">
   <img src= "{% static "img/index.jpeg" %}" />
-  <a href="#">Pepe Popov</a>
+  <a href="#">{{question.author.user.first_name}} {{question.author.user.last_name}} </a>
   <div>
     <div class="counter">
-      <span style = "margin-right: 0.3rem;"> 0 </span>
+      <span style = "margin-right: 0.3rem;">{{question.rating}} </span>
       <span class="arrows">
         <button class="btn-up"></button>
         <button class="btn-down"></button>
@@ -19,16 +19,16 @@
     <h3>{{question.title}}</h3>
   </a>
   <p class="text-q">
-    {{question.text}}
+    {{question.content}}
   </p>
   <row class = "footr-q">
-    <span class = "count-answer">answer(3)</span>
+    <span class = "count-answer">answer({{question.answers.count}})</span>
     <span class = "answer-tags">
         Tags:
         <ul class = "list-answer-tags">
-          {% for tag in question.tags %}
-                <li class = "answer-tag"><a href="{% url 'tag' tag %}">
-                  {{tag}}
+          {% for tag in question.tags.all %}
+                <li class = "answer-tag"><a href="{% url "tag" tag=tag.title %}">
+                  {{tag.title}}
                 </a></li>
           {% endfor %}
         </ul>

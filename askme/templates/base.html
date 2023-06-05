@@ -70,25 +70,18 @@
           </div>
           <div class = "row">
             <ol class="tags">
-              <li class="tag"><a href="{% url 'tag' 'Python' %}">Python</a></li>
-              <li class="tag"><a href="{% url 'tag' 'SQL' %}">SQL</a></li>
-              <li class="tag"><a href="{% url 'tag' 'Dust' %}">Rust</a></li>
-              <li class="tag"><a href="{% url 'tag' 'Django' %}">Django</a></li>
-              <li class="tag"><a href="{% url 'tag' 'Go' %}">Go</a></li>
-              <li class="tag"><a href="{% url 'tag' 'C++' %}">C++</a></li>
+              {% for tag in top_tags %}
+                <li class="tag"><a href="{% url "tag" tag=tag.title %}">{{tag.title}}</a></li>
+              {% endfor %}
             </ol>
           </div>
           <div class="row mt-4">
             <h2>Best members</h2>
           </div>
             <ol class="members">
-              <li class="member"><a href="#">Lorem Ipsum</a></li>
-              <li class="member"><a href="#">Lorem Ipsum</a></li>
-              <li class="member"><a href="#">Lorem Ipsum</a></li>
-              <li class="member"><a href="#">Lorem Ipsum</a></li>
-              <li class="member"><a href="#">Lorem Ipsum</a></li>
-              <li class="member"><a href="#">Lorem Ipsum</a></li>
-              <li class="member"><a href="#">Lorem Ipsum</a></li>
+              {% for user in top_users %}
+                <li class="member"><a href="#">{{user.user.first_name}} {{user.user.last_name}}</a></li>
+              {% endfor %}
             </ol>
          
         </div>

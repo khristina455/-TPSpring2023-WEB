@@ -6,10 +6,10 @@
             <div class="row" style = "margin-right: 2rem; border-bottom: 1px solid black; padding-bottom: 1rem;">
                 <div class="col-3 profile">
                   <img src= "{% static "img/index.jpeg" %}" />
-                  <a href="#">Pepe Popov</a>
+                  <a href="#">{{question.author.user.first_name}} {{question.author.user.last_name}}</a>
                   <div>
                     <div class="counter">
-                      <span style = "margin-right: 0.3rem;"> 0 </span>
+                      <span style = "margin-right: 0.3rem;"> {{question.rating}} </span>
                       <span class="arrows">
                         <button class="btn-up"></button>
                         <button class="btn-down"></button>
@@ -22,14 +22,17 @@
                     <h3>{{question.title}}</h3>
                   </a>
                   <p class="text-q">
-                    {{question.text}}
+                    {{question.content}}
                   </p>
                   <row class = "footr-q">
                     <span class = "answer-tags">
                         Tags:
                         <ul class = "list-answer-tags">
-                         <li class = "answer-tag"><a href="#">Go</a></li>,
-                         <li class = "answer-tag"><a href="#">SQL</a></li>
+                            {% for tag in question.tags.all %}
+                                 <li class = "answer-tag"><a href="{% url "tag" tag=tag.title %}">
+                                     {{tag.title}}
+                                 </a></li>
+                            {% endfor %}
                         </ul>
                     </span>
                   </row>
@@ -37,46 +40,13 @@
             </div>
           </div>
           <ul style="padding: 0rem;">
-            <li class="q">
-                <div class="row">
-                  <div class="col-3 profile">
-                    <img src= "{% static "img/index.jpeg" %}" />
-                    <a href="#">Pepe Popov</a>
-                    <div class = "checkbox">
-                        Correct
-                        <input type="checkbox">
-                    </div>
-                  </div>
-                  <div class="col-9 pt-2">
-                    <p class="text-q">
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Modi maiores tempore doloremque provident animi numquam,
-                      commodi rerum voluptatibus soluta neque?
-                    </p>
-                  </div>
-                </div>
-              </li>
-              <li class="q">
-                <div class="row">
-                  <div class="col-3 profile">
-                    <img src= "{% static "img/index.jpeg" %}" />
-                    <a href="#">Pepe Popov</a>
-                    <div class = "checkbox">
-                        Correct
-                        <input type="checkbox">
-                    </div>
-                  </div>
-                  <div class="col-9 pt-2">
-                    <p class="text-q">
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Modi maiores tempore doloremque provident animi numquam,
-                      commodi rerum voluptatibus soluta neque?
-                    </p>
-                  </div>
-                </div>
-              </li>
-              
-          </ul> 
+           {% for answer in page_obj %}
+                <li class="q">
+                    {%include "answer_item.html"%}
+                </li>
+              {% endfor %}
+          </ul>
+        {% include "paginator.html" %}
           <div class="form-group" style = "padding-top: 2rem; border-top: 1px solid black; padding-bottom: 1rem;">
             <textarea class="form-control" id="answer-to-enter" rows="5" placeholder="Enter your answer" style = "border: 1px solid black;"></textarea>
             <button type="button" class="btn btn-outline-dark me-2">

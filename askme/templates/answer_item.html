@@ -1,0 +1,17 @@
+{% load static %}
+
+<div class="row">
+    <div class="col-3 profile">
+        <img src= "{% static "img/index.jpeg" %}" />
+        <a href="#">{{answer.from_user.user.first_name}} {{answer.from_user.user.last_name}}</a>
+        <div class = "checkbox">
+            Correct
+            <input type="checkbox">
+        </div>
+    </div>
+    <div class="col-9 pt-2">
+        <p class="text-q">
+            {{answer.content}}
+        </p>
+    </div>
+</div>

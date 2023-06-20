@@ -35,8 +35,8 @@ class Command(BaseCommand):
 
         avatars = ["1.png", "2.jpeg", "3.png", "4.jpg", "5.jpg"]
         avatars = [f"static/img/avatar/user{avatar}" for avatar in avatars]
-
-        users = [User(id=i + 2, username=f"username{i + 2}", first_name=fake.first_name(), last_name=fake.last_name(),
+        User.objects.create_user(**self.cleaned_data)
+        users = [User.objects.create_user(id=i + 2, username=f"username{i + 2}", first_name=fake.first_name(), last_name=fake.last_name(),
                       password=fake.password()) for i in range(USERS)]
         User.objects.bulk_create(users)
         users = User.objects.exclude(is_superuser=True)

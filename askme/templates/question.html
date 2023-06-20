@@ -1,11 +1,12 @@
 {% extends "base.html"%}
 {% load static %}
+{% load bootstrap5 %}
 
 {% block content%}
           <div class="row my-4">
             <div class="row" style = "margin-right: 2rem; border-bottom: 1px solid black; padding-bottom: 1rem;">
                 <div class="col-3 profile">
-                  <img src= "{% static "img/index.jpeg" %}" />
+                  <img src= "{{question.author.avatar.url}}" />
                   <a href="#">{{question.author.user.first_name}} {{question.author.user.last_name}}</a>
                   <div>
                     <div class="counter">
@@ -48,9 +49,12 @@
           </ul>
         {% include "paginator.html" %}
           <div class="form-group" style = "padding-top: 2rem; border-top: 1px solid black; padding-bottom: 1rem;">
-            <textarea class="form-control" id="answer-to-enter" rows="5" placeholder="Enter your answer" style = "border: 1px solid black;"></textarea>
-            <button type="button" class="btn btn-outline-dark me-2">
+            <form action="{% url "question" question.id %}" method="post">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+            <button type="submit" class="btn btn-outline-dark me-2">
                 Answer
             </button>
+            </form>
           </div>
 {% endblock content%}

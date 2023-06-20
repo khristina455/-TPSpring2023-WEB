@@ -45,16 +45,11 @@
               aria-label="Search"
             />
           </form>
-          <div class="text-end">
-            <a href = "{% url 'login' %}">
-              <button type="button" class="btn btn-outline-light me-2">
-                Login
-              </button>
-            </a>
-            <a href = "{% url 'singup' %}">
-              <button type="button" class="btn btn-warning">Sign-up</button>
-            </a>
-          </div>
+          {% if user.is_authenticated %}
+                    {% include "auth_user_header.html" %}
+                {% else %}
+                    {% include "non_auth_user_header.html" %}
+          {% endif %}
         </div>
       </div>
       <div></div>
@@ -105,4 +100,7 @@
       <p class="text-center text-muted">2023 AskMe</p>
     </footer>
   </body>
+  <script src="{% static 'js/jquery-3.7.0.min.js' %}" defer></script>
+  <script src="{% static 'js/like-dislike.js' %}" defer></script>
+  <script src="{% static 'js/correct-answer.js' %}" defer></script>
 </html>

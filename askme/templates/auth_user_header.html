@@ -1,0 +1,22 @@
+{% load static %}
+
+<div id = "block-user">
+    <div class="row">
+          <div class="col-4 profile2">
+                <img src="{{user.profile.avatar.url}}" style="display: block; width: 4rem; height: 4rem; border-radius: 100%;" />
+              </div>
+              <div class="col-8">
+                <div class="row" id = "block-user-name">
+                  {{user.username}}
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <a href="{% url 'profile_edit' %}">settings</a>
+                  </div>
+                  <div class="col-6">
+                    <a href="{% url 'logout' %}">logout</a>
+                  </div>
+                </div>
+              </div>
+    </div>
+</div>

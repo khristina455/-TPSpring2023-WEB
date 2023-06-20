@@ -1,15 +1,15 @@
 {% load static %}
 
 <div class="row">
-<div class="col-3 profile">
-  <img src= "{% static "img/index.jpeg" %}" />
+<div class="col-3 profile" id="prof">
+  <img src= "{{question.author.avatar.url}}" alt=""/>
   <a href="#">{{question.author.user.first_name}} {{question.author.user.last_name}} </a>
   <div>
     <div class="counter">
-      <span style = "margin-right: 0.3rem;">{{question.rating}} </span>
+      <span id = "rating-{{ question.id }}" style = "margin-right: 0.3rem;">{{question.rating}} </span>
       <span class="arrows">
-        <button class="btn-up"></button>
-        <button class="btn-down"></button>
+        <button id="btn-up-{{ question.id }}" class="btn-up" data-id="{{ question.id }}" {% if question.id in user.likes.to_question %} style="border: solid" {% endif %}></button>
+        <button id="btn-down-{{ question.id }}" class="btn-down" data-id="{{ question.id }}"></button>
       </span>
     </div>
   </div>
@@ -27,7 +27,8 @@
         Tags:
         <ul class = "list-answer-tags">
           {% for tag in question.tags.all %}
-                <li class = "answer-tag"><a href="{% url "tag" tag=tag.title %}">
+                <li class = "answer-tag">
+                <a href="{% url "tag" tag=tag.title %}">
                   {{tag.title}}
                 </a></li>
           {% endfor %}

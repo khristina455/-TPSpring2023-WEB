@@ -32,6 +32,8 @@ class ProfileManager(models.Manager):
         profile.save()
 
 
+
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.PROTECT, related_name='profile')
     avatar = models.ImageField(blank=True, null=True, upload_to='avatars/%Y/%m/%d/', default='index.jpeg')
@@ -41,6 +43,17 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'({self.id}) {self.user.username}'
+
+    def liked_questions(self):
+        liked = [el.to_question for el in self.likes.filter(type="+")]
+        print("like")
+        print(liked)
+        return liked
+
+    def disliked_questions(self):
+        disliked = [el.to_question for el in self.likes.filter(type="-")]
+        print(disliked)
+        return disliked
 
 
 class QuestionManager(models.Manager):
@@ -111,6 +124,7 @@ class AnswerManager(models.Manager):
         answer = self.get(pk=answer_id)
         answer.is_correct = answer.is_correct ^ True
         answer.save()
+
 
 
 class Answer(models.Model):

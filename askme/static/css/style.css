@@ -69,6 +69,7 @@
   margin-bottom: 0.2rem;
   border: 1px solid rgb(35, 34, 34); /* Параметры рамки */
   box-shadow: 0 0 7px #666;
+  object-fit: cover;
 }
 
 .profile > img {
@@ -82,6 +83,7 @@
   margin-bottom: 0.2rem;
   border: 1px solid rgb(35, 34, 34); /* Параметры рамки */
   box-shadow: 0 0 7px #666;
+  object-fit: cover;
 }
 
 .member > a {
@@ -187,4 +189,10 @@ footer {
 .checkbox {
   text-align: center;
   padding-top: 1rem;
+}
+
+#upload-avatar {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
 }

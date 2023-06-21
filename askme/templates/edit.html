@@ -12,6 +12,9 @@
             <form action="/profile/edit/" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% bootstrap_form form %}
+                <div>
+                     <img id="upload-avatar" src="{{ user.profile.avatar.url }}" alt="your avatar">
+                </div>
                 <button type="submit" class="btn btn-outline-dark me-2">Save</button>
               </form>
           </div>

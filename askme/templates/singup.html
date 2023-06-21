@@ -12,6 +12,9 @@
             <form action="/singup/?continue=/" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% bootstrap_form form %}
+                <div>
+                    <img id="upload-avatar" src="/media/default-avatar.jpg" alt="your avatar">
+                </div>
                 <button type="submit" class="btn btn-outline-dark me-2">Register</button>
               </form>
           </div>

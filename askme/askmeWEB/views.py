@@ -1,6 +1,9 @@
+from cent import Client
 from django.contrib.auth.decorators import login_required
 from django.db.models.fields import json
 import json
+
+from django.forms import model_to_dict
 from django.shortcuts import render
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import redirect
@@ -20,16 +23,19 @@ def paginate(objects_list, request, per_page=3):
     return paginator.get_page(page_number)
 
 
-def context_for_sidebar(context):
+def context_for_sidebar(context, request):
     context['top_tags'] = models.Tag.objects.get_top5()
     context['top_users'] = models.Profile.objects.get_top5()
+    if request.user.is_authenticated:
+        context["liked_questions"] = request.user.profile.liked_questions()
+        context["disliked_questions"] = request.user.profile.disliked_questions()
 
 
 def index(request):
     questions = models.Question.objects.new_questions()
     page_obj = paginate(questions, request, 3)
     context = {'page_obj': page_obj, 'title': 'New Questions'}
-    context_for_sidebar(context)
+    context_for_sidebar(context, request)
     return render(request, 'index.html', context)
 
 
@@ -37,10 +43,11 @@ def hot(request):
     questions = models.Question.objects.hot_questions()
     page_obj = paginate(questions, request, 3)
     context = {'page_obj': page_obj, 'title': 'Hot Questions'}
-    context_for_sidebar(context)
+    context_for_sidebar(context, request)
     return render(request, 'index.html', context)
 
 
+client = Client("http://localhost:8002/api", api_key="999535b7-1525-48dd-87bd-e62c95f1a03a", timeout=1)
 def question(request, question_id):
     question = models.Question.objects.get_question(question_id)
     if question == None:
@@ -48,7 +55,7 @@ def question(request, question_id):
     answers = models.Answer.objects.get_by_question(question_id)
     page_obj = paginate(answers, request, 3)
     context = {'question': question, 'page_obj':page_obj}
-    context_for_sidebar(context)
+    context_for_sidebar(context, request)
     if request.method == "GET":
         answer_form = AnswerForm()
     elif request.method == "POST":
@@ -58,8 +65,9 @@ def question(request, question_id):
         if answer_form.is_valid():
             answer_id = answer_form.save(request.user, question)
             answers_cnt = question.answers.count()
-            num_page = (answers_cnt // 10) + 1
-            return HttpResponseRedirect(reverse("question", args=[question_id]) + f"?page=1#answer-{answer_id}")
+            num_page = (answers_cnt // 3) + 1
+            client.publish(f"question_{question_id}",  {"answer_id": "answer_id"})
+            return HttpResponseRedirect(reverse("question", args=[question_id]) + f"?page={num_page}#answer-{answer_id}")
     context['form'] = answer_form;
     return render(request, "question.html", context)
 
@@ -67,7 +75,7 @@ def question(request, question_id):
 @login_required(login_url="login", redirect_field_name="continue")
 def ask(request):
     context = {}
-    context_for_sidebar(context)
+    context_for_sidebar(context, request)
     if request.method == 'GET':
         ask_form = QuestionForm()
     elif request.method == 'POST':
@@ -82,7 +90,7 @@ def ask(request):
 @csrf_protect
 def login(request):
     context = {}
-    context_for_sidebar(context)
+    context_for_sidebar(context, request)
     if request.method == 'GET':
         login_form = LoginForm()
     elif request.method == 'POST':
@@ -104,7 +112,7 @@ def login(request):
 @login_required(login_url="login")
 def profile_edit(request):
     context = {}
-    context_for_sidebar(context)
+    context_for_sidebar(context, request)
     if request.method == 'GET':
         edit_form = ProfileEditForm(request.user)
     elif request.method == 'POST':
@@ -124,7 +132,7 @@ def logout(request):
 @csrf_protect
 def singup(request):
     context = {}
-    context_for_sidebar(context)
+    context_for_sidebar(context, request)
     if request.method == 'GET':
         reg_form = RegistrationForm()
     elif request.method == 'POST':
@@ -148,7 +156,7 @@ def tag(request, tag):
     questions = models.Question.objects.tag_questions(models.Tag.objects.get_by_title(tag))
     page_obj = paginate(questions, request, 3)
     context = {'page_obj': page_obj, 'title': f'Tag:{tag} Questions'}
-    context_for_sidebar(context)
+    context_for_sidebar(context, request)
     return render(request, 'index.html', context)
 
 

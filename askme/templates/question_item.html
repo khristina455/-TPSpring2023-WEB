@@ -8,8 +8,8 @@
     <div class="counter">
       <span id = "rating-{{ question.id }}" style = "margin-right: 0.3rem;">{{question.rating}} </span>
       <span class="arrows">
-        <button id="btn-up-{{ question.id }}" class="btn-up" data-id="{{ question.id }}" {% if question.id in user.likes.to_question %} style="border: solid" {% endif %}></button>
-        <button id="btn-down-{{ question.id }}" class="btn-down" data-id="{{ question.id }}"></button>
+        <button id="btn-up-{{ question.id }}" class="btn-up" data-id="{{ question.id }}" {% if question in liked_questions %} style="border: solid" {% endif %}></button>
+        <button id="btn-down-{{ question.id }}" class="btn-down" data-id="{{ question.id }} " {% if question in disliked_questions %} style="border: solid" {% endif %}></button>
       </span>
     </div>
   </div>

@@ -1,8 +1,11 @@
+import time
+
+import jwt
 from cent import Client
 from django.contrib.auth.decorators import login_required
 from django.db.models.fields import json
 import json
-
+from askme.settings import TOKEN_HMAC_SECRET_KEY, API_KEY
 from django.forms import model_to_dict
 from django.shortcuts import render
 from django.http import Http404, HttpResponseRedirect
@@ -47,8 +50,9 @@ def hot(request):
     return render(request, 'index.html', context)
 
 
-client = Client("http://localhost:8002/api", api_key="999535b7-1525-48dd-87bd-e62c95f1a03a", timeout=1)
+client = Client("http://localhost:8002/api", api_key=API_KEY, timeout=1)
 def question(request, question_id):
+    chan_id = f"question_{question_id}"
     question = models.Question.objects.get_question(question_id)
     if question == None:
         raise Http404("Question does not exist")
@@ -58,16 +62,26 @@ def question(request, question_id):
     context_for_sidebar(context, request)
     if request.method == "GET":
         answer_form = AnswerForm()
+        context["server_address"] = "ws://127.0.0.1:8002/connection/websocket"
+        context["cent_chan"] = chan_id
+        context["secret_token"] = jwt.encode({"sub": request.session.session_key, "exp": int(time.time()) + 10 * 60},
+                                   TOKEN_HMAC_SECRET_KEY)
     elif request.method == "POST":
         if request.user.is_anonymous:
             return HttpResponseRedirect(reverse("login"))
         answer_form = AnswerForm(request.POST)
         if answer_form.is_valid():
-            answer_id = answer_form.save(request.user, question)
+            answer = answer_form.save(request.user, question)
             answers_cnt = question.answers.count()
             num_page = (answers_cnt // 3) + 1
-            client.publish(f"question_{question_id}",  {"answer_id": "answer_id"})
-            return HttpResponseRedirect(reverse("question", args=[question_id]) + f"?page={num_page}#answer-{answer_id}")
+            data = model_to_dict(answer)
+            data["first_name"] = request.user.first_name
+            data["last_name"] = request.user.last_name
+            data["avatar_url"] = request.user.profile.avatar.url
+            data["qid"] = question_id
+            data["is_author"] = (request.user.profile == question.author)
+            client.publish(chan_id, data)
+            return HttpResponseRedirect(reverse("question", args=[question_id]) + f"?page={num_page}#answer-{answer.id}")
     context['form'] = answer_form;
     return render(request, "question.html", context)
 

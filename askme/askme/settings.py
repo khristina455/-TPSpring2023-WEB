@@ -133,3 +133,6 @@ MEDIA_ROOT = BASE_DIR/"media"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+API_KEY = "999535b7-1525-48dd-87bd-e62c95f1a03a"
+TOKEN_HMAC_SECRET_KEY = "3dbe82d6-0bab-40c8-8598-cab812720a93"

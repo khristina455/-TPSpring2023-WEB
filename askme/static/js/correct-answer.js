@@ -1,5 +1,5 @@
 
-$("input.correct").on('click', function (ev) {
+function correct {
     console.log("correct");
     const request = new Request(
     'http://127.0.0.1:8000/correct/',
@@ -16,4 +16,6 @@ $("input.correct").on('click', function (ev) {
     fetch(request).then(
         console.log("ok")
     );
-});
+}
+
+$(".correct").on("click", click_correct);

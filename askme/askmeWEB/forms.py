@@ -127,7 +127,7 @@ class AnswerForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields["content"].label = "Answer"
 
-    def save(self, user: User, question: models.Question) -> int:
+    def save(self, user: User, question: models.Question):
         answer = models.Answer(content=self.cleaned_data["content"], question=question, author=user.profile)
         answer.save()
-        return answer.id
+        return answer

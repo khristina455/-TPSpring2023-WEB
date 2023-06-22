@@ -32,8 +32,6 @@ class ProfileManager(models.Manager):
         profile.save()
 
 
-
-
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.PROTECT, related_name='profile')
     avatar = models.ImageField(blank=True, null=True, upload_to='avatars/%Y/%m/%d/', default='index.jpeg')
@@ -125,6 +123,12 @@ class AnswerManager(models.Manager):
         answer.is_correct = answer.is_correct ^ True
         answer.save()
 
+    def get_answer(self, aid):
+        try:
+            a = self.get(pk=aid)
+        except:
+            return None
+        return a
 
 
 class Answer(models.Model):

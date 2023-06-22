@@ -40,7 +40,7 @@
                 </div>
             </div>
           </div>
-          <ul style="padding: 0rem;">
+          <ul id="answers" style="padding: 0rem;">
            {% for answer in page_obj %}
                 <li class="q">
                     {%include "answer_item.html"%}
@@ -57,4 +57,10 @@
             </button>
             </form>
           </div>
+          <script src="https://cdn.jsdelivr.net/gh/centrifugal/centrifuge-js@2.2.3/dist/centrifuge.min.js"></script>
+           <script src="{% static 'js/jquery-3.7.0.min.js' %}" defer></script>
+          <script src="{% static 'js/real-time-answer.js' %}" defer
+          data-token="{{ secret_token }}"
+          data-chan="{{ cent_chan}}"
+          data-address="{{ server_address }}"></script>
 {% endblock content%}
